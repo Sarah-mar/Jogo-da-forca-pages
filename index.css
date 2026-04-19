@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.background-container {
+    position: relative;
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0;
+    background-color: #f7aaaa;
+    overflow: hidden;
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: white;
+    animation: anim-points 10s linear infinite;
+}
+
+.layer1 {
+    animation: moveStars 120s linear infinite;
+    opacity: 0.5;
+}
+
+.layer2 {
+    animation: moveStars 80s linear infinite;
+    opacity: 0.7;
+}
+
+.layer3 {
+    animation: moveStars 40s linear infinite;
+    opacity: 1;
+}
+
+.content-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0;
+    gap: 50px;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.title {
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    text-shadow: 5px 5px 5px rgba(255, 255, 255, 0.516);
+    gap: 20px;
+    font-size: 159px;
+    font-weight: 600px;
+    color: #F0104A;
+}
+
+.start-button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    color: #FFFFFF;
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 35px;
+    background-color: #ec557d;
+    border: 20px;
+    height: fit-content;
+    max-width: fit-content;
+    padding: 12px 48px;
+    margin-bottom: 24px;
+    transition: background-color .3s;
+}
+
+.start-button:hover {
+    background-color: #f07898;
+    /* mais claro */
+}
+
+@keyframes moveStars {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100vh);
+    }
+}
