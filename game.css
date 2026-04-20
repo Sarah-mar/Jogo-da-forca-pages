@@ -1,0 +1,143 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.background-container {
+    position: relative;
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0;
+    background-color: #ffc0c0;
+    overflow: hidden;
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: white;
+    animation: anim-points 10s linear infinite;
+}
+
+.layer1 {
+    animation: moveStars 120s linear infinite;
+    opacity: 0.5;
+}
+
+.layer2 {
+    animation: moveStars 80s linear infinite;
+    opacity: 0.7;
+}
+
+.layer3 {
+    animation: moveStars 40s linear infinite;
+    opacity: 1;
+}
+
+.content-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+    padding: 50px;
+    margin: 0;
+    gap: 30px;
+}
+
+.theme-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: baseline;
+    width: 100%;
+    align-items: baseline;
+    gap: 12px;
+    background-color: #f7aaaa;
+}
+
+.theme-header {
+    font-family: "Pixelify Sans", sans-serif;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.516);
+    font-optical-sizing: auto;
+    font-size: 40px;
+    font-weight: 600px;
+    color: #F0104A;
+}
+
+.chosen-theme {
+    font-family: "Pixelify Sans", sans-serif;
+    text-shadow: 2px 2px 5px #f0104c96(255, 255, 255, 0.516);
+    font-optical-sizing: auto;
+    font-size: 24px;
+    font-weight: 600px;
+    color: #ffffff;
+}
+
+.word-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+
+.letter-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    min-width: 64px;
+    min-height: 96px;
+    border-bottom: 5px solid #ffffff;
+}
+
+.alphabet-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    max-width: 720px;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.alphabet-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: "Pixelify Sans", sans-serif;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.516);
+    font-optical-sizing: auto;
+    font-size: 56px;
+    font-weight: 600px;
+    width: 56px;
+    height: 80px;
+    background-color: #f7aaaa;
+    color: #ffffff;
+}
+
+.alphabet-box:hover {
+    border: 3px solid #f03667;
+    border-radius: 10px;
+    background-color: #f8b7b7;
+    box-shadow: 4px 4px #d58888;
+}
+
+@keyframes moveStars {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100vh);
+    }
+}

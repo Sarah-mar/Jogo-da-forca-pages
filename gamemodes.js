@@ -1,44 +1,9 @@
-function generateStars(selector, qtd) {
-    const container = document.querySelector('.background-container');
-    const el = document.querySelector(selector);
-
-    const width = container.clientWidth;
-    const height = container.clientHeight;
-
-    let shadows = [];
-
-    for (let i = 0; i < qtd; i++) {
-        const x = Math.random() * width;
-        const y = Math.random() * height;
-        const opacity = Math.random();
-
-        shadows.push(`${x}px ${y}px rgba(255,255,255,${opacity})`);
-    }
-
-    el.style.boxShadow = shadows.join(',');
-}
-
-window.addEventListener('load', () => {
-    generateStars('.layer1', 150);
-    generateStars('.layer2', 100);
-    generateStars('.layer3', 70);
-});
-
-document.querySelector(".options").addEventListener("click", function () {
-    window.location.href = "game.html"
-});
-
-let tema = null;
-
-function selectTheme(event) {
-    theme = event.target.id;
-    console.log("Tema selecionado:", theme);
-}
-
 const options = document.querySelectorAll('.options');
 
-options.forEach(option => {
-    option.addEventListener('click', selectTheme);
+options.forEach(el => {
+    el.addEventListener('click', () => {
+        const selectedTheme = el.id;
+        localStorage.setItem('themeChoice', selectedTheme);
+        window.location.href = 'game.html';
+    });
 });
-
-console.log(tema)
