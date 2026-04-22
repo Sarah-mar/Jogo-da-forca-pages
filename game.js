@@ -37,7 +37,10 @@ const themes = {
 }
 
 let triesLeft = 7;
-let theme = localStorage.getItem('themeChoice') || "animais";
+const lostHeader = "Não foi dessa vez... A palavra era:"
+const winHeader = "Parabéns, você arrasou! A palavra era:"
+
+let theme = localStorage.getItem('themeChoice');
 function wordSelector(key) {
     const themeWords = themes[key];
     return themeWords[Math.floor(Math.random() * themeWords.length)];
@@ -46,6 +49,8 @@ function wordSelector(key) {
 function normalize(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
+
+let currentWord = "";
 
 function handleGuess(selectedLetter, word) {
     const letterContainers = document.querySelectorAll(".letter-container");
@@ -60,37 +65,192 @@ function handleGuess(selectedLetter, word) {
             found = true;
         }
     }
-    if (!found) {
+
+    if (found) {
+        const allFilled = Array.from(letterContainers).every(div => div.textContent.trim() !== "");
+        if (allFilled) {
+            showOverlay(winHeader, word);
+        }
+    } else {
         triesLeft--;
-        console.log(`Errou! Tentativas restantes: ${triesLeft}`);
+        let triesBox = document.querySelector(".tries-box");
+        if (triesBox) triesBox.remove();
+
+        if (triesLeft === 0) {
+            showOverlay(lostHeader, word);
+        }
     }
 }
 
+function showOverlay(header, word) {
+    const overlay = document.querySelector(".overlay");
+
+    overlay.innerHTML = "";
+
+    let finishHeader = document.createElement("div");
+    finishHeader.classList.add("finish-header");
+    finishHeader.innerHTML = header;
+
+    let finishContent = document.createElement("div");
+    finishContent.classList.add("finish-content");
+    finishContent.innerHTML = word.toUpperCase();
+
+    overlay.appendChild(finishHeader);
+    overlay.appendChild(finishContent);
+
+
+    let btnReset = document.createElement("button");
+    btnReset.innerHTML = "Jogar Novamente";
+    btnReset.onclick = () => window.location.reload();
+    overlay.appendChild(btnReset);
+
+    overlay.style.display = 'flex';
+}
+
 function setupGame(chosenTheme) {
-    const container = document.querySelector(".word-container");
-    const word = wordSelector(chosenTheme);
+    document.querySelector('.overlay').style.display = 'none';
+    const wordContainer = document.querySelector(".word-container");
+    const chosenThemeContainer = document.querySelector(".chosen-theme");
+    let triesLeftContent = document.querySelector(".tries-left-content");
 
-    container.innerHTML = "";
 
-    for (let i = 0; i < word.length; i++) {
+    currentWord = wordSelector(chosenTheme);
+
+    chosenThemeContainer.innerHTML = chosenTheme;
+    wordContainer.innerHTML = "";
+    triesLeftContent.innerHTML = "";
+
+    for (let i = 0; i < triesLeft; i++) {
+        let newTriesBox = document.createElement("div");
+        newTriesBox.innerHTML = '<img src="pinkPixelHeart.png" alt="Pink Pixel Heart" width="30">';
+        newTriesBox.classList.add("tries-box");
+        triesLeftContent.appendChild(newTriesBox);
+    }
+
+    for (let i = 0; i < currentWord.length; i++) {
         const newLetter = document.createElement("div");
         newLetter.classList.add("letter-container");
-        if (word[i] === " ") newLetter.textContent = " ";
-        container.appendChild(newLetter);
+        if (currentWord[i] === " ") newLetter.textContent = " ";
+        wordContainer.appendChild(newLetter);
     }
 
     const alphabet = document.querySelectorAll('.alphabet-box');
     alphabet.forEach(el => {
-        el.addEventListener('click', () => {
-            if (el.classList.contains('used')) return;
 
-            el.classList.add('used');
-            handleGuess(el.id, word);
+        el.classList.remove('used');
+
+        const newEl = el.cloneNode(true);
+        el.parentNode.replaceChild(newEl, el);
+
+        newEl.addEventListener('click', () => {
+            if (newEl.classList.contains('used')) return;
+            newEl.classList.add('used');
+            handleGuess(newEl.id, currentWord);
         });
     });
 }
 
-
 if (theme) {
     setupGame(theme);
 }
+
+// let triesLeft = 7;
+// const lostHeader = "Não foi dessa vez... A palavra era:"
+// const winHeader = "Parabéns, você arrasou! A palavra era:"
+
+// let theme = localStorage.getItem('themeChoice');
+// function wordSelector(key) {
+//     const themeWords = themes[key];
+//     return themeWords[Math.floor(Math.random() * themeWords.length)];
+// }
+
+// function normalize(str) {
+//     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+// }
+
+// function handleGuess(selectedLetter, word) {
+//     const letterContainers = document.querySelectorAll(".letter-container");
+//     const overlayText = document.querySelector(".overlay-text");
+//     let found = false;
+
+//     const normalizedSelected = normalize(selectedLetter.toLowerCase());
+//     const normalizedWord = normalize(word.toLowerCase());
+
+//     for (let i = 0; i < normalizedWord.length; i++) {
+//         if (normalizedWord[i] === normalizedSelected) {
+//             letterContainers[i].textContent = word[i];
+//             found = true;
+//         }
+//     }
+
+//     if (found) {
+//         const allFilled = Array.from(letterContainers).every(div => div.textContent.trim() !== "");
+//         if (allFilled) {
+//             showOverlay(winHeader);
+//         }
+//     } else {
+//         triesLeft--;
+//         let triesBox = document.querySelector(".tries-box");
+//         triesBox.remove();
+//         if (triesLeft === 0) {
+//             showOverlay(lostHeader);
+//         };
+//     };
+// }
+
+// function showOverlay(header) {
+//     const overlay = document.querySelector(".overlay");
+//     let finishHeader = document.createElement("div");
+//     finishHeader.classList.add("finish-header");
+//     finishHeader.innerHTML = header;
+//     let finishContent = document.createElement("div");
+//     finishContent.classList.add("finish-content");
+//     finishContent.innerHTML = word;
+//     overlay.appendChild(finishHeader);
+//     overlay.appendChild(finishContent);
+//     overlay.style.display = 'block';
+// }
+
+// function setupGame(chosenTheme) {
+//     document.querySelector('.overlay').style.display = 'none';
+//     const wordContainer = document.querySelector(".word-container");
+//     const chosenThemeContainer = document.querySelector(".chosen-theme");
+//     let triesLeftContent = document.querySelector(".tries-left-content");
+//     const word = wordSelector(chosenTheme);
+//     console.log(chosenTheme)
+//     console.log(word)
+
+//     chosenThemeContainer.innerHTML = chosenTheme;
+//     wordContainer.innerHTML = "";
+
+//     for (let i = 0; i < triesLeft; i++) {
+//         let newTriesBox = document.createElement("div");
+//         newTriesBox.innerHTML = '<img src="pinkPixelHeart.png" alt="Pink Pixel Heart">';
+//         newTriesBox.classList.add("tries-box");
+//         triesLeftContent.appendChild(newTriesBox);
+//     }
+
+//     for (let i = 0; i < word.length; i++) {
+//         const newLetter = document.createElement("div");
+//         newLetter.classList.add("letter-container");
+//         if (word[i] === " ") newLetter.textContent = " ";
+//         wordContainer.appendChild(newLetter);
+//     }
+
+//     const alphabet = document.querySelectorAll('.alphabet-box');
+//     alphabet.forEach(el => {
+//         el.addEventListener('click', () => {
+//             if (el.classList.contains('used')) return;
+
+//             el.classList.add('used');
+//             handleGuess(el.id, word);
+//         });
+//     });
+
+
+// }
+
+
+// if (theme) {
+//     setupGame(theme);
+// }
