@@ -196,6 +196,23 @@ img {
     font-weight: 600px;
 }
 
+.space-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    min-width: 64px;
+    min-height: 96px;
+    border-bottom: 5px solid #ffffff;
+    color: #F0104A;
+    font-family: "Pixelify Sans", sans-serif;
+    text-shadow: 2px 2px 5px #fa99b3(255, 255, 255, 0.516);
+    font-optical-sizing: auto;
+    font-size: 64px;
+    font-weight: 600px;
+    border-bottom: #ffffff00;
+}
+
 .alphabet-container {
     display: flex;
     flex-wrap: wrap;
