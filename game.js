@@ -1,12 +1,11 @@
 const themes = {
-    // "animais": [
-    //     "cachorro", "gato", "elefante", "leão", "tigre", "urso", "lobo", "raposa", "girafa", "zebra",
-    //     "macaco", "gorila", "chimpanze", "cavalo", "vaca", "boi", "porco", "ovelha", "cabra", "coelho",
-    //     "rato", "camundongo", "esquilo", "castor", "lontra", "hiena", "guepardo", "panda", "canguru", "coalha",
-    //     "ornitorrinco", "tatu", "tamandua", "preguica", "doninha", "furão", "texugo", "chacal", "dingo", "leopardo",
-    //     "jaguar", "pantera", "bisão", "búfalo", "alce", "rena", "cervo", "antílope", "gazela", "iaque"
-    // ],
-    "animais": ["rato"],
+    "animais": [
+        "cachorro", "gato", "elefante", "leão", "tigre", "urso", "lobo", "raposa", "girafa", "zebra",
+        "macaco", "gorila", "chimpanze", "cavalo", "vaca", "boi", "porco", "ovelha", "cabra", "coelho",
+        "rato", "camundongo", "esquilo", "castor", "lontra", "hiena", "guepardo", "panda", "canguru", "coalha",
+        "ornitorrinco", "tatu", "tamandua", "preguica", "doninha", "furão", "texugo", "chacal", "dingo", "leopardo",
+        "jaguar", "pantera", "bisão", "búfalo", "alce", "rena", "cervo", "antílope", "gazela", "iaque"
+    ],
     "cores": [
         "vermelho", "azul", "verde", "amarelo", "roxo", "laranja", "rosa", "marrom", "preto", "branco",
         "cinza", "turquesa", "ciano", "magenta", "lilás", "bege", "bordô", "vinho", "mostarda", "ocre",
