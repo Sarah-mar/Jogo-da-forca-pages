@@ -36,6 +36,7 @@ const themes = {
     ]
 }
 
+
 let triesLeft = 7;
 const lostHeader = "Não foi dessa vez... A palavra era:"
 const winHeader = "Parabéns, você arrasou! A palavra era:"
