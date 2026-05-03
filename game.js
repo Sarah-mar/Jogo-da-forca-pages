@@ -1,11 +1,12 @@
 const themes = {
-    "animais": [
-        "cachorro", "gato", "elefante", "leão", "tigre", "urso", "lobo", "raposa", "girafa", "zebra",
-        "macaco", "gorila", "chimpanze", "cavalo", "vaca", "boi", "porco", "ovelha", "cabra", "coelho",
-        "rato", "camundongo", "esquilo", "castor", "lontra", "hiena", "guepardo", "panda", "canguru", "coalha",
-        "ornitorrinco", "tatu", "tamandua", "preguica", "doninha", "furão", "texugo", "chacal", "dingo", "leopardo",
-        "jaguar", "pantera", "bisão", "búfalo", "alce", "rena", "cervo", "antílope", "gazela", "iaque"
-    ],
+    // "animais": [
+    //     "cachorro", "gato", "elefante", "leão", "tigre", "urso", "lobo", "raposa", "girafa", "zebra",
+    //     "macaco", "gorila", "chimpanze", "cavalo", "vaca", "boi", "porco", "ovelha", "cabra", "coelho",
+    //     "rato", "camundongo", "esquilo", "castor", "lontra", "hiena", "guepardo", "panda", "canguru", "coalha",
+    //     "ornitorrinco", "tatu", "tamandua", "preguica", "doninha", "furão", "texugo", "chacal", "dingo", "leopardo",
+    //     "jaguar", "pantera", "bisão", "búfalo", "alce", "rena", "cervo", "antílope", "gazela", "iaque"
+    // ],
+    "animais": ["rato"],
     "cores": [
         "vermelho", "azul", "verde", "amarelo", "roxo", "laranja", "rosa", "marrom", "preto", "branco",
         "cinza", "turquesa", "ciano", "magenta", "lilás", "bege", "bordô", "vinho", "mostarda", "ocre",
@@ -58,8 +59,8 @@ function handleGuess(selectedLetter, word) {
 
     const normalizedSelected = normalize(selectedLetter.toLowerCase());
     const normalizedWordwithSpaces = normalize(word.toLowerCase());
-    const normalizedWord = normalizedWordwithSpaces.replaceAll(' ', '');
-    let comparisonWord = word.replaceAll(' ', '');
+    const normalizedWord = normalizedWordwithSpaces.replaceAll(' ', '').replaceAll('-', '');
+    let comparisonWord = word.replaceAll(' ', '').replaceAll('-', '');
 
 
     for (let i = 0; i < normalizedWord.length; i++) {
@@ -135,6 +136,12 @@ function setupGame(chosenTheme) {
             const newLetter = document.createElement("div");
             newLetter.classList.add("space-container");
             newLetter.textContent = " ";
+            wordContainer.appendChild(newLetter);
+        }
+        else if (currentWord[i] === "-") {
+            const newLetter = document.createElement("div");
+            newLetter.classList.add("space-container");
+            newLetter.textContent = "-";
             wordContainer.appendChild(newLetter);
         }
         else {

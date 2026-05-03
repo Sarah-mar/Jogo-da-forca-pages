@@ -7,8 +7,7 @@
 .background-container {
     position: relative;
     min-height: 100vh;
-    width: 100vw;
-    margin: 0;
+    width: 100%;
     background-color: #f7aaaa;
     overflow: hidden;
 }
@@ -42,53 +41,55 @@
 
 .content-container {
     position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    width: 100vw;
-    margin: 0;
-    gap: 50px;
+    width: 100%;
+    padding: 20px;
+    gap: 16vh;
+    text-align: center;
 }
 
 .title-container {
     display: flex;
     flex-direction: row;
+    width: 100%;
     justify-content: center;
 }
 
 .title {
     font-family: "Pixelify Sans", sans-serif;
-    font-optical-sizing: auto;
     text-shadow: 5px 5px 5px rgba(255, 255, 255, 0.516);
     gap: 20px;
-    font-size: 159px;
-    font-weight: 600px;
+    font-size: clamp(3rem, 15vw, 159px);
+    font-weight: 600;
     color: #F0104A;
+    line-height: 1;
 }
 
 .start-button {
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
+    align-items: center;
     color: #FFFFFF;
     font-family: "Pixelify Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-size: 35px;
+    font-size: clamp(1.2rem, 4vw, 35px);
     background-color: #ec557d;
-    border: 20px;
-    height: fit-content;
-    max-width: fit-content;
-    padding: 12px 48px;
-    margin-bottom: 24px;
-    transition: background-color .3s;
+    border: none;
+    height: auto;
+    min-width: auto;
+    padding: 12px 40px;
+    transition: background-color .3s, transform 0.2s;
 }
 
 .start-button:hover {
     background-color: #f07898;
-    /* mais claro */
+    transform: scale(1.05);
 }
 
 @keyframes moveStars {
@@ -98,5 +99,18 @@
 
     to {
         transform: translateY(-100vh);
+    }
+}
+
+@media (max-width: 600px) {
+    .title {
+        text-shadow: 3px 3px 3px rgba(255, 255, 255, 0.5);
+    }
+
+    .start-button {
+        font-size: clamp(1.2rem, 5vw, 35px);
+        padding: 12px 30px;
+        width: 50%;
+        height: 30%;
     }
 }

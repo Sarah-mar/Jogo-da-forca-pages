@@ -7,8 +7,7 @@
 .background-container {
     position: relative;
     min-height: 100vh;
-    width: 100vw;
-    margin: 0;
+    width: 100%;
     background-color: #f7aaaa;
     overflow: hidden;
 }
@@ -17,7 +16,6 @@
     position: absolute;
     top: 0;
     left: 0;
-
     width: 3px;
     height: 3px;
     border-radius: 50%;
@@ -42,30 +40,36 @@
 
 .content-container {
     position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    width: 100vw;
-    padding: 50px;
-    margin: 0;
-    gap: 30px;
+    width: 100%;
+    padding: 20px;
+    gap: 5vh;
 }
 
 .title-container {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
 }
 
 .title {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     font-family: "Pixelify Sans", sans-serif;
     text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.516);
-    font-optical-sizing: auto;
-    font-size: 70px;
-    font-weight: 600px;
+    font-size: clamp(3rem, 12vw, 70px);
+    font-weight: 600;
     color: #F0104A;
+    line-height: 1.1;
 }
 
 .options-container {
@@ -73,29 +77,31 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: fit-content;
-    margin: 0;
-    gap: 20px;
+    width: 60%;
+    max-width: 240px;
+    gap: 15px;
 }
 
 .options {
     cursor: pointer;
     display: flex;
     justify-content: center;
+    align-items: center;
     color: #FFFFFF;
     font-family: "Pixelify Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-size: 30px;
+    font-size: clamp(1.2rem, 4vw, 30px);
     background-color: #ec557d;
-    height: 72px;
-    width: 240px;
-    padding: 12px 0px;
-    transition: background-color .3s;
+    height: auto;
+    min-height: 60px;
+    width: 90%;
+    max-width: 280px;
+    padding: 12px 20px;
+    transition: background-color .3s transform 0.2s;
 }
 
 .options:hover {
     background-color: #f07898;
+    transform: scale(1.05);
 }
 
 @keyframes moveStars {
@@ -105,5 +111,16 @@
 
     to {
         transform: translateY(-100vh);
+    }
+}
+
+@media (max-width: 360px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .options {
+        width: 100%;
+        font-size: 1.1rem;
     }
 }
